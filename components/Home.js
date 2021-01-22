@@ -20,6 +20,7 @@ class Home extends Component {
          let res = this.props.restaurants.find( restaurant => restaurant.name === this.state.name)
          
          if(res){this.props.history.push('/'+res.id)}
+        else {alert("no restaurant available of this name");}
          
         }
     
