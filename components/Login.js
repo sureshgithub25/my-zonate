@@ -1,9 +1,10 @@
 import React,{Component} from 'react'
 import {connect} from 'react-redux'
+import {TextField,Typography,Button} from '@material-ui/core'
 class Login extends Component{
     state= {
          name:null,
-         number: null,
+         email: null,
          password: null
     }
     handlechange = (e) => {
@@ -12,28 +13,71 @@ class Login extends Component{
         })}
     handleSubmit = (e) =>{
       e.preventDefault()
+      let a =this.state
+      console.log(a);
+      if(a.name&&a.email&&a.password){
      this.props.addUser(this.state.name)
-     this.props.history.push('/')
+     this.props.history.push('/')}
+     else{
+         alert("enter valid login detail");
+     }
     }
     render(){
         return(
-            <div className='container'>
-                <h2 > Login </h2> 
+            <div className='contain'>
             
-                <form   onSubmit={this.handleSubmit} className="col s12">
+                <Typography variant="h2" > Login </Typography> 
+            
+                <form   onSubmit={this.handleSubmit} >
                 
-                <label htmlFor="name">Name:</label>
-                <input type='text' id="name" onChange={this.handlechange}/>
-                 <label htmlFor="number"> mobile no:</label>
-                  <input type='text' id="number" onChange={this.handlechange}/>
-                  <label htmlFor="password">Password:</label>
-                  <input type="password" id="password" onChange={this.handlechange}/>
-                  <button>Submit</button>
-                  <label>new user?</label>
-                  <button className="red">Sign in</button>
+                <TextField
+                      variant="outlined"
+                        margin="normal"
+                       required
+            
+                      id="name"
+                     label="Name"
+                      name="name"
+                    onChange={this.handlechange}
+                   />
+                <TextField
+                      variant="outlined"
+                        margin="normal"
+                        required
+                      
+                      id="email"
+                     label="Email Address"
+                      name="email"
+                    autoComplete="email"
+                    onChange={this.handlechange}
+                   />
+                  <TextField
+                     variant="outlined"
+                     margin="normal"
+                     required
+                    name="password"
+                    label="Password"
+                    type="password"
+                    id="password"
+                    autoComplete="current-password"
+                    onChange={this.handlechange}
+                    />
+                  <br></br>
+                  <Button
+                    type="submit"
+                   
+                    variant="contained"
+                    color="primary"
+                    onClick={this.handleSubmit}
+                    >
+                    Log In
+                </Button>
                   
+
                   </form>
-                
+                  <label>new user?</label>
+                  <Button className="red" >Sign in</Button>
+                  
             </div>
         )
     }
